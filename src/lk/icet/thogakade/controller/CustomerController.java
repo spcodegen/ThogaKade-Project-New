@@ -63,7 +63,7 @@ public class CustomerController {
          return idSet;
     }
     
-    public static ArrayList<Customer>getAllCustomers() throws ClassNotFoundException, SQLException{
+    public static ArrayList<Customer> getAllCustomers() throws ClassNotFoundException, SQLException{
         ResultSet rst = DBConnection.getInstance().getConnection().createStatement().executeQuery("Select * From Customer");
         ArrayList <Customer>customerList=new ArrayList<>();
         while(rst.next()){

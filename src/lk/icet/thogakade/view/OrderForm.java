@@ -565,6 +565,8 @@ public class OrderForm extends javax.swing.JFrame {
             boolean isAdded = OrderController.placeOrder(order);
             if (isAdded) {
                 JOptionPane.showMessageDialog(this, "Added success");
+            }else{
+                JOptionPane.showMessageDialog(this, "Added Fail");
             }
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

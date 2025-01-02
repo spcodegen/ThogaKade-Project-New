@@ -38,7 +38,7 @@ public class ItemController {
                 return false;
             }
         }
-        return true;
+        return orderDetailList.isEmpty();
     }
     public static boolean updateItemStock(String itemCode, int qty) throws ClassNotFoundException, SQLException{
         PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement("Update Item set QtyOnHand=qtyOnHand-? where code=?");

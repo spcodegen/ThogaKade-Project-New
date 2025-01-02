@@ -54,6 +54,11 @@ public class SearchCustomerForm extends javax.swing.JFrame {
         jLabel2.setText("Customer ID");
 
         idText.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        idText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idTextActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Name");
@@ -150,6 +155,10 @@ public class SearchCustomerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        idTextActionPerformed(evt);
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void idTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextActionPerformed
         try {
             Customer customer=CustomerController.searchCustomer(idText.getText());
             if(customer!=null){
@@ -164,7 +173,7 @@ public class SearchCustomerForm extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, "Driver not found...");
         }
-    }//GEN-LAST:event_searchButtonActionPerformed
+    }//GEN-LAST:event_idTextActionPerformed
 
     /**
      * @param args the command line arguments

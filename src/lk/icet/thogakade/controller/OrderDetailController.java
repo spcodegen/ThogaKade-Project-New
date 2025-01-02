@@ -23,7 +23,7 @@ public class OrderDetailController {
                 return false;
             }
         }
-        return true;
+        return !orderDetailsList.isEmpty();
     }
     public static boolean addOrderDetail(OrderDetail orderDetail) throws ClassNotFoundException, SQLException{
         PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement("insert into OrderDetail values(?,?,?,?)");
