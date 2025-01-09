@@ -5,6 +5,7 @@
  */
 package lk.icet.thogakade.view;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import lk.icet.thogakade.controller.CustomerController;
 import lk.icet.thogakade.controller.ItemController;
 import lk.icet.thogakade.controller.OrderController;
+import lk.icet.thogakade.db.DBConnection;
 import lk.icet.thogakade.model.Item;
 import lk.icet.thogakade.model.Order;
 import lk.icet.thogakade.model.OrderDetail;
@@ -588,7 +590,14 @@ public class OrderForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQtyActionPerformed
 
     private void btnCommitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommitActionPerformed
-
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            connection.commit();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCommitActionPerformed
 
     /**

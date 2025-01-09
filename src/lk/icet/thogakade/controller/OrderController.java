@@ -20,13 +20,16 @@ import lk.icet.thogakade.model.Order;
  */
 public class OrderController {
     
-    public static String getLastOrderId() throws SQLException, ClassNotFoundException {
+    public static String getLastOrderId() throws SQLException, ClassNotFoundException {   
         Connection connection = DBConnection.getInstance().getConnection();
         Statement stm = connection.createStatement();
         ResultSet rst = stm.executeQuery("SELECT id FROM Orders ORDER BY id DESC LIMIT 1");
         return rst.next() ? rst.getString("id") : null;
     }
     public static boolean placeOrder(Order order) throws ClassNotFoundException, SQLException{
+        Connection connection=DBConnection.getInstance().getConnection();
+        try {
+            connection.setAutoCommit(false);
         PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement("Insert into Orders values(?,?,?)");
         stm.setObject(1,order.getId());
         stm.setObject(2,order.getDate());
@@ -37,11 +40,16 @@ public class OrderController {
             if(isAddOrderDetails){
                 boolean isUpdate=ItemController.updateItemStock(order.getOrderDetailList());
                 if(isUpdate){
+                    connection.commit();
                     return true;
                 }
             }
         }
+        connection.rollback();
         return false;
+        } finally {
+            connection.setAutoCommit(true);
+        }
     }
     
 }
